@@ -1,9 +1,10 @@
 version: '3'
 services:
-#  geek-frontend:
-#    image: frontend:latest
-#    ports:
-#      - "8081:80"
+
+  geek-frontend:
+    image: frontend:latest
+    ports:
+      - "8081:80"
 
   geek-lesson8-backend:
     image: registry.heroku.com/geek-lesson8/web:latest
@@ -11,14 +12,14 @@ services:
       - "8080"
     depends_on:
       - db
-    command: bash -c "/apps/wait-for-service.sh db 3307 && /apps/entrypoint.sh"
+    command: bash -c "/apps/wait-for-service.sh db 3306 && /apps/entrypoint.sh"
 
   db:
     image: mysql:8.0.27
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
 
